@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="dynamic-title">Hello World!🌏Nice2CU :) </title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(to right, #2c3e50, #3498db);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: #333;
+            position: relative;
+            cursor: none; /* Hide default cursor */
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            min-height: 100vh; 
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            animation: cursorPulse 1.5s infinite;
+        }
+
+        @keyframes cursorPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.5;
+            }
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: auto;
+            width: 80%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sidebar {
+            background-color: #34495e;
+            color: white;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+
+        .sidebar img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 4px solid white;
+        }
+
+        .sidebar h1 {
+            margin: 0;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .sidebar .info-item {
+            font-size: 1.2em;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar .info-item i {
+            margin-right: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5em;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #3498db;
+        }
+
+        .content {
+            padding: 30px;
+            flex: 1;
+            background-color: #f5f7fa;
+            overflow-y: auto;
+            text-align: justify;
+        }
+
+        .content h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .content h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+
+        .content ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .content ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 1em;
+        }
+
+        .content ul li:before {
+            content: "\2022";
+            color: #3498db;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5em;
+            line-height: 1;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skills-grid span {
+            background: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .skills-grid span:hover {
+            transform: scale(1.1);
+            background: #2c3e50;
+        }
+
+        .weather-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .weather-widget h3 {
+            margin: 0 0 5px;
+            font-size: 1em;
+            color: #2c3e50;
+        }
+
+        .weather-widget p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            color: #34495e;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <canvas id="spider-canvas"></canvas>
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="weather-widget" id="weather-widget">
+        <h3>Loading Weather...</h3>
+        <p>Please wait...</p>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <img src="avatar.PNG" alt="Profile Picture">
+            <h1>Abduweli Mijit</h1>
+            <div class="info-item">
+                <i class="fas fa-briefcase"></i>
+                <span>Data Scientist</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Sheffield, England, UK</span>
+            </div>
+            <div class="social-icons">
+                <a href="https://github.com/uossheldon" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="content">
+            <h1>About Me</h1>
+            <p>MSc Data Science student with expertise in data visualization, machine learning, and statistical modeling. Experienced in leading projects and developing innovative solutions for real-world problems.</p>
+            <p><strong>Research interests:</strong></p>
+            <p><i class="fas fa-lightbulb" style="color: #3498db;"></i> Human-Machine Interaction and flexible sensing technologies.</p>
+            <h2>Experience 🛠️</h2>
+            <ul>
+                <li><strong>INF6027/4000: Analyzing Influential Variables in International Football</strong> (2024-2025)<br>
+                Developed an analytical project examining home advantage and performance trends in international football, focusing on statistical modeling and visualization techniques using R.
+                <a href="https://github.com/uossheldon/INF6027-FootballAnalysis" class="github-link" title="View Code on GitHub"><i class="fab fa-github"></i> View Code</a>
+                </li>
+                <li><strong>Leader, Guangdong-Hong Kong-Macau Greater Bay Area HMI National Key Laboratory</strong> (2021-2024)<br>
+                Led a team to develop novel flexible motion sensors for human behavior recognition and health monitoring, utilizing SVM-based ML algorithms. Published two SCI papers and filed patents.</li>
+                <li><strong>Web Programmer, Guangzhou Daima Education Technology</strong> (2019-2021)<br>
+                Maintained and optimized online education systems and delivered programming courses including Python and C++.</li>
+            </ul>
+
+            <h2>Education 🎓</h2>
+            <ul>
+                <li><strong>M.Sc. Data Science</strong>, University of Sheffield (2024-2025)</li>
+                <li><strong>M.Eng. Intelligent Wearable Sensors & HMI</strong>, Shenzhen Institute of Advanced Technology (2021-2024)</li>
+                <li><strong>B.Eng. Applied Electronic Technology Education</strong>, Guangdong Polytechnic Normal University (2015-2019)</li>
+            </ul>
+
+            <h2>Publications 📚</h2>
+            <ul>
+                <li>Spatio-Temporal Action Representation-based Multimodal Human Action Recognition Model for Martial Arts Action Analysis (Under Review)</li>
+                <li>Silver Nanowire-Based Flexible Strain Sensor for Human Motion Detection. <i>Sensors</i>, DOI: <a href="https://doi.org/10.3390/s24113329">10.3390/s24113329</a></li>
+                <li>Self-supporting multi-functional two-dimensional nanofilms for flexible perceptual devices. <i>JMSE</i>, DOI: <a href="https://doi.org/10.1007/s10854-024-12532-5">10.1007/s10854-024-12532-5</a></li>
+                <li>Multilayer Silver Nanowire Composite Flexible Motion Sensor and Its Preparation Method and Application. (Invention Patent) </li>
+            </ul>
+            <h2>Skills 💻</h2>
+            <div class="skills-grid">
+                <span>R Programming</span>
+                <span>Data Visualization</span>
+                <span>Machine Learning (SVM)</span>
+                <span>Python</span>
+                <span>Java</span>
+                <span>C++</span>
+                <span>STM32</span>
+                <span>Web Programming</span>
+                <span>Linux</span>
+                <span>Matlab</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cursor = document.getElementById('custom-cursor');
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = `${e.pageX}px`;
+                cursor.style.top = `${e.pageY}px`;
+            });
+
+            // Weather API Integration
+            const weatherWidget = document.getElementById('weather-widget');
+            const API_KEY = '887450afb9ae4e4fc05054f8856fb48c';
+            const city = 'Sheffield';
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Weather data not available');
+                const data = await response.json();
+
+                const weather = data.weather[0].description;
+                const temp = Math.round(data.main.temp);
+
+                weatherWidget.innerHTML = `
+                    <h3>${city} Weather</h3>
+                    <p>${weather.charAt(0).toUpperCase() + weather.slice(1)}</p>
+                    <p>${temp}°C</p>
+                `;
+            } catch (error) {
+                weatherWidget.innerHTML = `
+                    <h3>Error</h3>
+                    <p>Unable to load weather data.</p>
+                `;
+            }
+
+            // Spiderweb Canvas Effect
+            const canvas = document.getElementById('spider-canvas');
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            const maxParticles = 100;
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            class Particle {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.vx = Math.random() * 2 - 1;
+                    this.vy = Math.random() * 2 - 1;
+                    this.radius = Math.random() * 3;
+                }
+
+                move() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x > canvas.width || this.x < 0) this.vx *= -1;
+                    if (this.y > canvas.height || this.y < 0) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                    ctx.fill();
+                }
+            }
+
+            function connectParticles() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / 120})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach((p) => {
+                    p.move();
+                    p.draw();
+                });
+                connectParticles();
+                requestAnimationFrame(animate);
+            }
+
+            for (let i = 0; i < maxParticles; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        });
+    </script>
+</body>
+</html>
